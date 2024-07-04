@@ -1,0 +1,131 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.firebase.crashlytics'
+}
+
+android {
+    compileSdkVersion 32
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "ru.iteco.fmhandroid"
+        minSdkVersion 21
+        targetSdkVersion 32
+        versionCode 14
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"https://students.netoservices.ru/qamid-diplom-backend/"'
+        }
+        debug {
+            buildConfigField "String", "BASE_URL", '"https://students.netoservices.ru/qamid-diplom-backend/"'
+        }
+    }
+}
+
+
+ext {
+    versions = [
+            retrofit                : "2.9.0",
+            okhttpLogging           : "4.9.2",
+            fragment                : "1.4.1",
+            lifecycle               : "2.4.1",
+            room                    : "2.4.2",
+            navigation              : "2.3.5",
+            recyclerView            : "1.2.1",
+            material                : "1.5.0",
+            constraintLayout        : "2.1.3",
+            coroutines              : "1.5.2",
+            hilt                    : "2.41",
+            gson                    : "2.9.0",
+            swipeRefreshLayout      : "1.1.0",
+            firebaseBom             : "29.0.3",
+            testCore                : "1.4.0",
+            testJUnit               : "1.1.3",
+            junit                   : "4.13.2",
+            testExtJUnit            : "1.1.4-alpha07",
+            testRules               : "1.4.1-alpha07",
+            testRunner              : "1.4.0",
+            espresso                : "3.5.0-alpha07",
+            allure                  : "2.4.0",
+            uiAutomator             : "2.2.0",
+            hamcrest                : "1.3",
+            desugar                 : "1.1.5"
+    ]
+}
+
+dependencies {
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.0-alpha07'
+
+    implementation "androidx.core:core-ktx:1.7.0"
+    implementation "androidx.appcompat:appcompat:1.4.1"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:${versions.swipeRefreshLayout}"
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+    implementation "androidx.room:room-runtime:${versions.room}"
+    kapt "androidx.room:room-compiler:${versions.room}"
+    implementation "androidx.room:room-ktx:${versions.room}"
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
+    implementation "com.google.code.gson:gson:${versions.gson}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttpLogging}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-play-services:${versions.coroutines}"
+    implementation "androidx.fragment:fragment-ktx:${versions.fragment}"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:${versions.lifecycle}"
+    kapt "androidx.lifecycle:lifecycle-compiler:${versions.lifecycle}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerView}"
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:${versions.desugar}")
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    kapt "com.google.dagger:hilt-compiler:${versions.hilt}"
+    implementation platform("com.google.firebase:firebase-bom:${versions.firebaseBom}")
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+
+    androidTestImplementation "androidx.test:core-ktx:${versions.testCore}"
+    androidTestImplementation "androidx.test.ext:junit-ktx:${versions.testJUnit}"
+    androidTestImplementation "androidx.test:runner:${versions.testCore}"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-android:${versions.allure}"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-model:${versions.allure}"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-commons:${versions.allure}"
+    androidTestImplementation "io.qameta.allure:allure-kotlin-junit4:${versions.allure}"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:${versions.uiAutomator}"
+    androidTestImplementation "org.hamcrest:hamcrest-integration:${versions.hamcrest}"
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.testExtJUnit}"
+    androidTestImplementation "androidx.test:rules:${versions.testRules}"
+    androidTestImplementation "androidx.test:runner:${versions.testRunner}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    implementation "androidx.test.espresso:espresso-idling-resource:3.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.4.0"
+}
